@@ -23,12 +23,29 @@ class Admin::ContentController < Admin::BaseController
     end
   end
 
+  def merge_with
+    unless Profile.find(current_user.profile_id).label == 'admin'
+      flash[:error] = _("Only admin can merge articles")
+      redirect_to :action => :index
+    end
+    
+    article = Article.find_by_id(params[:id])
+    if article.merge_with(params[:merge_with])
+      flash[:notice] = _('Successfully merged articles')
+      redirect_to :action => :index
+    else
+      flash[:notice] = _('Failed to merge articles')
+      redirect_to :action => :edit, :id => params[:id]
+    end
+  end
+
   def new
     new_or_edit
   end
 
   def edit
     @article = Article.find(params[:id])
+    @admin = Profile.find(current_user.profile_id).label == "admin"
     unless @article.access_by? current_user
       redirect_to :action => 'index'
       flash[:error] = _("Error, you are not allowed to perform this action")
@@ -240,4 +257,5 @@ class Admin::ContentController < Admin::BaseController
   def setup_resources
     @resources = Resource.by_created_at
   end
+ 
 end
