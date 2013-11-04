@@ -17,9 +17,9 @@ Feature: Merge articles
       | 4  | article2 | user2   | body2 | 1              | 1         | 3       |
 
     And the following comments exist:
-      | id | article_id | author   | body     |
-      | 1  | 3          | user1    | comment1 |
-      | 2  | 4          | user2    | comment2 |
+      | id | article_id | author   | body     | user_id | published_at        |
+      | 1  | 3          | user1    | comment1 | 2       | 2013-03-11 22:00:00 |
+      | 2  | 4          | user2    | comment2 | 3       | 2013-03-11 21:00:00 |
   
   Scenario: A non-admin cannot merge two articles
     Given I am logged in as "user1" with the password "userpass"

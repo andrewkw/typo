@@ -5,7 +5,7 @@
 
 <% end %>
 
-<% if @article.id and @admin%>
+<% if @article and @admin%>
   <h3> Merge </h3>
   <%= form_tag :action => 'merge_with', :id => @article.id do %>
     <%= text_field_tag "merge_with" %>
