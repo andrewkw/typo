@@ -24,12 +24,12 @@ Feature: Merge articles
   Scenario: A non-admin cannot merge two articles
     Given I am logged in as "user1" with the password "userpass"
     And I am on the edit page of the Article with id "3"
-    Then I should not see "Merge"
+    Then I should not see "Merge Articles"
 
   Scenario: An admin can see the option to merge articles
     Given I am logged in as "admin" with the password "aaaaaaaa"
     And I am on the edit page of the Article with id "3"
-    Then I should see "Merge"
+    Then I should see "Merge Articles"
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
     Given the article with id "3" has been merged with article with id "4"
